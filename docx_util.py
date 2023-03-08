@@ -47,10 +47,74 @@ def generate_output_path():
     return filepath
 
 
+def gen_h0(content: str):
+    doc = Document()
+    doc.add_heading(content, level=0)
+    return doc
+
+
+def gen_h1(content: str):
+    doc = Document()
+    doc.add_heading(content, level=1)
+    return doc
+
+
+def gen_h2(content: str):
+    doc = Document()
+    doc.add_heading(content, level=2)
+    return doc
+
+
+def gen_h3(content: str):
+    doc = Document()
+    doc.add_heading(content, level=3)
+    return doc
+
+
+def gen_h4(content: str):
+    doc = Document()
+    doc.add_heading(content, level=4)
+    return doc
+
+
+def gen_pa(content: str):
+    doc = Document()
+    doc.add_paragraph(content)
+    return doc
+
+
+def gen_doc(content: str):
+    doc = Document(content)
+    return doc
+
+
+def gen_page_break(content: str):
+    doc = Document()
+    doc.add_page_break()
+    return doc
+
+
+cmds = {"h0": gen_h0, "h1": gen_h1, "h2": gen_h2, "h3": gen_h3, "h4": gen_h4, "pa": gen_pa, "do": gen_doc,
+        "pb": gen_page_break}
+
+
+def produce_doc(output_filepath):
+    output_composer = Composer(Document("./样式模板.docx"))
+    with open("./word_template.txt", "r", encoding="utf-8") as f:
+        for idx, line in enumerate(f.read().splitlines()):
+            strs = line.split(':', 1)
+            if strs[0] == "":
+                continue
+            output_composer.append(cmds[strs[0]](strs[1]))
+    output_composer.save(output_filepath)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    source_filepath_list = load_source_list()
     output_filepath = generate_output_path()
-    merge_docs(source_filepath_list, output_filepath)
-    print("===========================")
-    print(f"输出: {output_filepath}")
+    produce_doc(output_filepath)
+    # source_filepath_list = load_source_list()
+    # output_filepath = generate_output_path()
+    # merge_docs(source_filepath_list, output_filepath)
+    # print("===========================")
+    # print(f"输出: {output_filepath}")
