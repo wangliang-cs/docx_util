@@ -111,6 +111,7 @@ def produce_doc(output_filepath):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    #样式模板结束
     output_filepath = generate_output_path()
     produce_doc(output_filepath)
     # source_filepath_list = load_source_list()
