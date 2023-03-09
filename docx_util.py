@@ -84,7 +84,7 @@ def gen_pa(content: str):
 
 
 def gen_doc(content: str):
-    doc = Document(content)
+    doc = Document(root_dir + content)
     return doc
 
 
@@ -105,13 +105,17 @@ def produce_doc(output_filepath):
             strs = line.split(':', 1)
             if strs[0] == "":
                 continue
+            print(line)
             output_composer.append(cmds[strs[0]](strs[1]))
     output_composer.save(output_filepath)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    #样式模板结束
+    # 样式模板结束
+    root_dir = "C:/Users/liang/Documents/我的坚果云/0_WiP/20180917_群智大项目/20230302_验收绩效评价文档===============/素材/分项/"
+    if not os.path.exists(root_dir):
+        root_dir = "D:/sync/wangliang/我的坚果云/0_WiP/20180917_群智大项目/20230302_验收绩效评价文档===============/素材/分项/"
     output_filepath = generate_output_path()
     produce_doc(output_filepath)
     # source_filepath_list = load_source_list()
