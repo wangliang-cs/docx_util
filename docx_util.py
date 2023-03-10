@@ -100,7 +100,7 @@ cmds = {"h0": gen_h0, "h1": gen_h1, "h2": gen_h2, "h3": gen_h3, "h4": gen_h4, "p
 
 def produce_doc(output_filepath):
     output_composer = Composer(Document("./样式模板.docx"))
-    with open("./word_template.txt", "r", encoding="utf-8") as f:
+    with open("./word_template_cut_2_sec.txt", "r", encoding="utf-8") as f:
         for idx, line in enumerate(f.read().splitlines()):
             strs = line.split(':', 1)
             if strs[0] == "":
